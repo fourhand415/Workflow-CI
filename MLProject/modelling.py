@@ -7,7 +7,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 # ===== EXPERIMENT =====
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
 mlflow.set_experiment("CI-Retraining")
 
 # ===== LOAD DATA =====
@@ -31,5 +30,6 @@ with mlflow.start_run():
     mlflow.log_param("model", "RandomForestClassifier")
     mlflow.log_metric("accuracy", acc)
     mlflow.sklearn.log_model(model, "model")
+
 
     print("Accuracy:", acc)
