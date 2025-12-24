@@ -4,12 +4,11 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
 
-# ===== MLFLOW CONFIG =====
+# ===== EXPERIMENT =====
 mlflow.set_experiment("CI-Retraining")
 
-# ===== AUTOLOGGING =====
+# ===== AUTOLOGGING (WAJIB, SESUAI RUBRIK) =====
 mlflow.sklearn.autolog()
 
 # ===== LOAD DATA =====
@@ -23,11 +22,5 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # ===== TRAIN =====
-with mlflow.start_run():
-    model = RandomForestClassifier(random_state=42)
-    model.fit(X_train, y_train)
-
-    y_pred = model.predict(X_test)
-    acc = accuracy_score(y_test, y_pred)
-
-    print("Accuracy:", acc)
+model = RandomForestClassifier(random_state=42)
+model.fit(X_train, y_train)
